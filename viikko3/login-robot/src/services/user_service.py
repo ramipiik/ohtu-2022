@@ -1,3 +1,4 @@
+import re, sys, pdb
 from entities.user import User
 
 
@@ -14,6 +15,9 @@ class UserService:
         self._user_repository = user_repository
 
     def check_credentials(self, username, password):
+        # pysäytetään ohjelman suoritus tälle riville
+        # pdb.Pdb(stdout=sys.__stdout__).set_trace()
+
         if not username or not password:
             raise UserInputError("Username and password are required")
 
@@ -37,4 +41,19 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
 
+        user = self._user_repository.find_by_username(username)
+        if user:
+            raise AuthenticationError("Username already taken")
+
+        if len(username)<3:
+            raise UserInputError("Username must contain at least 3 characters")
+
+        if not re.match("^[a-z]+$", username):
+            raise UserInputError("Username can only contain characters a-z")
+
+        if len(password)<8:
+            raise UserInputError("Password must contain at least 8 characters")
+
+        if not re.search("[^a-z]", password):
+            raise UserInputError("Password must contain at one non-letter")
         # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
