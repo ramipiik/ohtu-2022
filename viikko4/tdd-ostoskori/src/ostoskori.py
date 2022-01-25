@@ -23,7 +23,14 @@ class Ostoskori:
 
     def lisaa_tuote(self, lisattava: Tuote):
         # lisää tuotteen
-        pass
+        # pass
+        for ostos in self.ostokset():
+            if ostos.tuotteen_nimi()==lisattava:
+                ostos.muuta_lukumaaraa(1)
+                return
+        
+        self.kori.append(Ostos(lisattava))
+        
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
@@ -38,4 +45,5 @@ class Ostoskori:
         # palauttaa listan jossa on korissa olevat ostos-oliot
         # kukin ostos-olio siis kertoo mistä tuotteesta on kyse JA kuinka monta kappaletta kyseistä tuotetta korissa on
         return self.kori
+
 
