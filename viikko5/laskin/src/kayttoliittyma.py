@@ -16,8 +16,8 @@ class Summa:
 
     def suorita(self):
         arvo = int(self.lue())
+        self.sovelluslogiikka.edellinen=self.sovelluslogiikka.tulos
         self.sovelluslogiikka.tulos+=arvo
-
 
 class Erotus:
     def __init__(self, sovelluslogiikka, lue):
@@ -26,6 +26,7 @@ class Erotus:
 
     def suorita(self):
         arvo = int(self.lue())
+        self.sovelluslogiikka.edellinen=self.sovelluslogiikka.tulos
         self.sovelluslogiikka.tulos-=arvo
 
 
@@ -34,6 +35,7 @@ class Nollaus:
         self.sovelluslogiikka = sovelluslogiikka
 
     def suorita(self):
+        self.sovelluslogiikka.edellinen=self.sovelluslogiikka.tulos
         self.sovelluslogiikka.tulos=0
 
 
@@ -42,7 +44,7 @@ class Kumoa:
         self.sovelluslogiikka = sovelluslogiikka
 
     def suorita(self):
-        self.sovelluslogiikka.tulos=999
+        self.sovelluslogiikka.tulos=self.sovelluslogiikka.edellinen
 
 
 class Kayttoliittyma:
