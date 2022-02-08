@@ -27,6 +27,17 @@ class And:
         
         return True
 
+class Or:
+    def __init__(self, *matchers):
+        self._matchers = matchers
+    
+    def matches(self, player):
+        for item in self._matchers:
+            for matcher in item:
+                if matcher.matches(player):
+                    return True
+        return False
+
 class QueryBuilder:
     def __init__(self, query=All()):
         self.query_object=query
@@ -40,10 +51,11 @@ class QueryBuilder:
     def hasFewerThan(self, value, attr):
         return QueryBuilder(And(HasFewerThan(value, attr), self.query_object))
 
+    def oneOf(self, *params):
+        return QueryBuilder(Or(params))
+
     def build(self):
         return self.query_object
-
-
 
 class Not:
     def __init__(self, *matchers):
@@ -53,10 +65,7 @@ class Not:
         for matcher in self._matchers:
             if not matcher.matches(player):
                 return True
-        
         return False
-
-
 
 class HasAtLeast:
     def __init__(self, value, attr):
@@ -77,12 +86,3 @@ class HasFewerThan:
         player_value = getattr(player, self._attr)
         return player_value < self._value
 
-class Or:
-    def __init__(self, *matchers):
-        self._matchers = matchers
-    
-    def matches(self, player):
-        for matcher in self._matchers:
-            if matcher.matches(player):
-                return True
-        return False

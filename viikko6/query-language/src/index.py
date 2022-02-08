@@ -14,13 +14,31 @@ def main():
     # matcher = query.playsIn("NYR").build()
     # matcher = query.playsIn("NYR").hasAtLeast(5, "goals").hasFewerThan(10, "goals") .build()
     
-    matcher = (
-      query  
-        .playsIn("NYR")  
-        .hasAtLeast(5, "goals")  
-        .hasFewerThan(10, "goals")  
+    # matcher = (
+    #   query  
+    #     .playsIn("NYR")  
+    #     .hasAtLeast(5, "goals")  
+    #     .hasFewerThan(10, "goals")  
+    #     .build()
+    # )
+
+    m1 = (
+        query
+            .playsIn("PHI")
+            .hasAtLeast(10, "assists")
+            .hasFewerThan(5, "goals")
+            .build()
+        )
+
+    m2 = (
+    query
+        .playsIn("EDM")
+        .hasAtLeast(40, "points")
         .build()
     )
+
+    matcher = query.oneOf(m2, m1).build()
+    print("matcher", matcher)
 
     for player in stats.matches(matcher):
         print(player)
