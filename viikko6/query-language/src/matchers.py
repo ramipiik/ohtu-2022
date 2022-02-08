@@ -1,3 +1,21 @@
+class Query:
+    def __init__(self):
+        self.kysely = All()
+
+class All:
+    def __init__(self, *matchers):
+        self._matchers = matchers
+    
+    def matches(self, player):
+        return True
+
+class PlaysIn:
+    def __init__(self, team):
+        self._team = team
+
+    def matches(self, player):
+        return player.team == self._team
+
 class And:
     def __init__(self, *matchers):
         self._matchers = matchers
@@ -9,12 +27,23 @@ class And:
         
         return True
 
-class All:
-    def __init__(self, *matchers):
-        self._matchers = matchers
+class QueryBuilder:
+    def __init__(self, query=All()):
+        self.query_object=query
     
-    def matches(self, player):
-        return True
+    def playsIn(self, team):
+        return QueryBuilder(And(PlaysIn(team), self.query_object))
+
+    def hasAtLeast(self, value, attr):
+        return QueryBuilder(And(HasAtLeast(value, attr), self.query_object))
+    
+    def hasFewerThan(self, value, attr):
+        return QueryBuilder(And(HasFewerThan(value, attr), self.query_object))
+
+    def build(self):
+        return self.query_object
+
+
 
 class Not:
     def __init__(self, *matchers):
@@ -27,12 +56,7 @@ class Not:
         
         return False
 
-class PlaysIn:
-    def __init__(self, team):
-        self._team = team
 
-    def matches(self, player):
-        return player.team == self._team
 
 class HasAtLeast:
     def __init__(self, value, attr):
