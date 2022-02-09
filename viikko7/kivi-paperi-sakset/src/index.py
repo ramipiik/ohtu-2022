@@ -1,7 +1,8 @@
 from kps_pelaaja_vs_pelaaja import KPSPelaajaVsPelaaja
 from kps_tekoaly import KPSTekoaly
-from kps_parempi_tekoaly import KPSParempiTekoaly
 from tuomari import Tuomari
+from tekoaly import Tekoaly
+from tekoaly_parannettu import TekoalyParannettu
 
 def main():
     while True:
@@ -16,9 +17,9 @@ def main():
         if vastaus.endswith("a"):
             peli = KPSPelaajaVsPelaaja(Tuomari())
         elif vastaus.endswith("b"):
-            peli = KPSTekoaly(Tuomari())
+            peli = KPSTekoaly(Tuomari(), Tekoaly())
         elif vastaus.endswith("c"):
-            peli = KPSParempiTekoaly(Tuomari())
+            peli = KPSTekoaly(Tuomari(), TekoalyParannettu(10))
         else:
             break
         peli.pelaa()

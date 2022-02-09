@@ -16,9 +16,6 @@ class KPS:
 
     def _ensimmaisen_siirto(self):
       return input("Ensimmäisen pelaajan siirto: ")
-
-    def _toisen_siirto(self, ensimmaisen_siirto):
-        pass
         
     def _onko_ok_siirto(self, siirto):
         return siirto == "k" or siirto == "p" or siirto == "s"

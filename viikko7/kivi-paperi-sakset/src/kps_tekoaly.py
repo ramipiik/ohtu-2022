@@ -1,10 +1,9 @@
-from tekoaly import Tekoaly
 from kps import KPS
 
 class KPSTekoaly(KPS):
-    def __init__(self, tuomari):
+    def __init__(self, tuomari, tekoaly):
         super().__init__(tuomari)
-        self.tekoaly = Tekoaly()
+        self.tekoaly = tekoaly
 
     def _toisen_siirto(self, ensimmaisen_siirto):
         tokan_siirto = self.tekoaly.anna_siirto()
