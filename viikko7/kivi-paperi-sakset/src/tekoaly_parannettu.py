@@ -15,6 +15,7 @@ class TekoalyParannettu:
         self._muisti[self._vapaa_muisti_indeksi] = siirto
         self._vapaa_muisti_indeksi = self._vapaa_muisti_indeksi + 1
 
+
     def anna_siirto(self):
         if self._vapaa_muisti_indeksi == 0 or self._vapaa_muisti_indeksi == 1:
             return "k"
