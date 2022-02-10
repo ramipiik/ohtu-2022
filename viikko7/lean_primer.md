@@ -1,5 +1,4 @@
-Referaatti kirjasta Lean primer
-http://www.leanprimer.com/downloads/lean_primer.pdf
+## Referaatti kirjasta [Lean primer](http://www.leanprimer.com/downloads/lean_primer.pdf)
 
 Lean-filosofia on syntynyt Toyotassa. Se on kokonaisvaltainen systeeminen ajattelutapa, joka kattaa koko yrityksen toiminnan kehityksestä tuotantoon ja johtamiseen. Leanin kaksi keskeistä tukipilaria ovat ihmisten kunnioitus ja jatkuva parantaminen.
 
